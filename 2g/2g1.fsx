@@ -2,6 +2,7 @@
 #r "nuget:DIKU.Canvas, 1.0"
 
 open Canvas
+
 type vec = float * float
 
 
@@ -36,12 +37,21 @@ let setVector (c: canvas) (color: color) (v: vec) (p: vec) : unit =
     setLine c color (toInt p) (toInt (add v p))
 
 
-
 let draw w h =
     let c = create w h
     let centerx = float (w / 2)
     let centery = float (h / 2)
-    setVector c blue (100, 0) (centerx, centery)
+
+    for i = 1 to 36 do
+        setVector
+            c
+            blue
+            (rot
+                (200, 0)
+                ((float (i*2) * System.Math.PI)
+                 / float (36)))
+            (centerx, centery)
+
     c
 
 let drawMultiple w h =
