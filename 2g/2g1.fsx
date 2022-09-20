@@ -44,8 +44,17 @@ let draw w h =
     setVector c blue (100, 0) (centerx, centery)
     c
 
+let drawMultiple w h =
+    let c = create w h
+    let centerx = float (w / 2)
+    let centery = float (h / 2)
+    for i = 1 to 36 do
+        setVector c blue (rot (100,0) ((float(i*2)*System.Math.PI)/float(36))) (centerx, centery)
+    c
+
+
 
 let width = 600
 let height = width
 
-do show (draw width height) "Canvas"
+do show (drawMultiple width height) "Canvas"
