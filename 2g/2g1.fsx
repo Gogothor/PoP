@@ -20,7 +20,7 @@ let add ((a1, b1): vec) ((a2, b2): vec) : vec = a1 + a2, b1 + b2
 /// <param name="vec1">First Vector</param>
 /// <param name="vec2">Second Vector</param>
 /// <returns>New Vector vec1 * vec2</returns>
-let mul ((a1, b1): vec) ((a2, b2): vec) : vec = a1 * a2, b1 * b2
+let mul ((a1, b1): vec) (c: float) : vec = a1 * c, b1 * c
 
 /// <summary>
 ///  Given a vector, rotate it by "r" radians
@@ -43,14 +43,7 @@ let draw w h =
     let centery = float (h / 2)
 
     for i = 1 to 36 do
-        setVector
-            c
-            blue
-            (rot
-                (200, 0)
-                ((float (i*2) * System.Math.PI)
-                 / float (36)))
-            (centerx, centery)
+        setVector c blue (rot (200, 0) ((float (i * 2) * System.Math.PI) / float (36))) (centerx, centery)
 
     c
 
