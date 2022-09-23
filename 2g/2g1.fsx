@@ -55,27 +55,25 @@ let setVector (c: canvas) (color: color) (v: vec) (p: vec) : unit =
 /// <param name="w">Width of window</param>
 /// <param name="h">Height of window</param>
 /// <returns>Canvas</returns>
-let draw w h =
+let draw w h (s: float) =
     let c = create w h
     let centerx = float (w / 2)
     let centery = float (h / 2)
 
     for i = 1 to 36 do
-        setVector c blue (rot (200, 0) ((float (i * 2) * System.Math.PI) / float (36))) (centerx, centery)
+        setVector c blue (rot (200, 0) ((float (i * 2) * System.Math.PI) / float (36) + s)) (centerx, centery)
 
     c
 
-let drawMultiple w h =
-    let c = create w h
-    let centerx = float (w / 2)
-    let centery = float (h / 2)
-    for i = 1 to 36 do
-        setVector c blue (rot (100,0) ((float(i*2)*System.Math.PI)/float(36))) (centerx, centery)
-    c
 
+let react (s: float) (k: key) : float option =
+    match getKey k with
+    | LeftArrow -> Some(s - 0.01)
+    | RightArrow -> Some(s + 0.01)
+    | _ -> None
 
 
 let width = 600
 let height = width
 
-do show (drawMultiple width height) "Canvas"
+do runApp "Canvas" width height draw react 1
