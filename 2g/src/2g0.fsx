@@ -10,11 +10,11 @@ type vec = float * float
 let add ((a1, b1): vec) ((a2, b2): vec) : vec = a1 + a2, b1 + b2
 
 /// <summary>
-///  Given two vectors, multiply them together
+///  Given a vector and a scalar value, multiply vector with scalar
 /// </summary>
 /// <param name="vec1">First Vector</param>
-/// <param name="vec2">Second Vector</param>
-/// <returns>New Vector vec1 * vec2</returns>
+/// <param name="c">Constant</param>
+/// <returns>New Vector vec1 * c</returns>
 let mul ((a1, b1): vec) (c: float) : vec = a1 * c, b1 * c
 
 /// <summary>
