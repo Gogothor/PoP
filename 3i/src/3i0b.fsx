@@ -28,3 +28,17 @@ let fromMoveFold (lst: move list) : Canvas.turtleCmd list =
 /// <returns>List of turtleCmd commands</returns>
 let fromMoveFoldBack (lst: move list) : Canvas.turtleCmd list =
     List.foldBack (fun m l -> Turn(fst m) :: Move(snd m) :: l) lst []
+
+let lst =
+    [ move (10, 30)
+      move (-5, 127)
+      move (20, 90) ]
+
+let res = fromMoveRec lst
+printfn "fromMoveRex: %A" res
+let res2 = fromMoveMap lst
+printfn "fromMoveMap: %A" res2
+let res3 = fromMoveFold lst
+printfn "fromMoveFold: %A" res3
+let res4 = fromMoveFoldBack lst
+printfn "fromMoveFoldBack: %A" res4
