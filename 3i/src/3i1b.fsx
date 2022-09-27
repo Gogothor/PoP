@@ -34,6 +34,11 @@ let rec tree (sz: int) : Canvas.turtleCmd list =
                         PenDown ]
 
 
+/// <summary>
+/// Generates a turtle command fractal tree, and places it randomly in the canvas
+/// </summary>
+/// <param name="sz">The size of the tree</param>
+/// <returns>A list of turtle commands</returns>
 let randomTree (sz: int) : Canvas.turtleCmd list =
     let rnd = System.Random()
     let woff = (w / 10) * (rnd.Next 10) - (w / 2)
@@ -56,10 +61,15 @@ let randomTree (sz: int) : Canvas.turtleCmd list =
 
     pre @ tree sz @ post
 
+
+/// <summary>Recursively generates randomly places fractal trees in the canvas</summary>
+/// <param name="sz">The size of the tree</param>
+/// <param name="n">Number of trees to place</param>
+/// <returns>A list of turtle commands</returns>
 let rec forest (sz: int) (n: int) : Canvas.turtleCmd list =
     if n > 0 then
         randomTree sz @ forest sz (n - 1)
     else
         []
 
-turtleDraw (w, h) "Tree" (forest sz 50)
+turtleDraw (w, h) "Tree" (forest sz 10)

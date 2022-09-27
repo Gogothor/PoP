@@ -31,38 +31,31 @@ let w = 600
 let h = w
 let sz = 100
 
-// turtleDraw (w, h) "Tree" (tree sz)
-
-
-
-
+/// <summary>
+/// Generates a turtle command tree, but places it randomly in the canvas
+/// </summary>
+/// <param name="sz">The size of the tree</param>
+/// <returns>A list of turtle commands</returns>
 let randomTree (sz: int) : Canvas.turtleCmd list =
     let rnd = System.Random()
-    let v = rnd.Next 10
-    let woff = (w / 10) * v - (w / 2)
-    let hoff = (h / 10) * v - (h / 2)
+    let woff = (w / 10) * (rnd.Next 10) - (w / 2)
+    let hoff = (h / 10) * (rnd.Next 10) - (h / 2)
 
     let pre =
         [ PenUp
-          Turn 90
           Move hoff
           Turn 90
           Move woff
-          Turn 180
+          Turn -90
           PenDown ]
 
-    pre @ tree sz
+    let post =
+        [ PenUp
+          Move -hoff
+          Turn 90
+          Move -woff
+          Turn -90 ]
 
-
-
-// let randomTreeone: canvas =
-//     let C = create w h
-//     let woff = (w / 10) * v - (w / 2)
-//     let hoff = (h / 10) * v - (h / 2)
-//     setLine C blue (w / 2, h / 2) (woff, hoff)
-//     C
-
-// do show randomTree "d"
-
+    pre @ tree sz @ post
 
 turtleDraw (w, h) "Tree" (randomTree sz)
